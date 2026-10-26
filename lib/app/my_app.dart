@@ -1,30 +1,32 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:audio_library/router/app_router.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FlutterNativeSplash.remove();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ScreenUtilPlusInit(
-      designSize: const Size(360, 690), // Figma design dimensions
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return Sizer(
-          builder: (context, orientation, deviceType) {
-            return MaterialApp.router(
-              // DevicePreview configurations
-              locale: DevicePreview.locale(context),
-              builder: DevicePreview.appBuilder,
-              
-              // Your router configuration
-            );
-          },
-        );
-      },
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      routerConfig: appRouter,
     );
   }
 }
