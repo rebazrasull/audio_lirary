@@ -1,4 +1,7 @@
+import 'package:audio_library/login/login_screen.dart';
+import 'package:audio_library/router/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class IntroPage extends StatefulWidget {
@@ -11,11 +14,8 @@ class IntroPage extends StatefulWidget {
 class _IntroPageState extends State<IntroPage> {
 
   // ignore: strict_top_level_inference, non_constant_identifier_names
-  void _EndWelcomePage(BuildContext context, Widget nextScreen) {
-  Navigator.pop(context);
-  Navigator.of(context).push(
-    MaterialPageRoute(builder: (context) => nextScreen),
-  );
+void _endWelcomePage(BuildContext context) {
+    context.go(RouteNames.login);
 }
 
   List<PageViewModel> getPage(){
@@ -67,12 +67,8 @@ class _IntroPageState extends State<IntroPage> {
     next: Text('Next'),
     skip: Text('Skip'),
     done:  Text("Done"),
-     onDone: () {
-    _EndWelcomePage;
-   },
-   onSkip: () {
-      _EndWelcomePage;
-   },
+     onDone: () => _endWelcomePage(context),
+     onSkip: () => _endWelcomePage(context),
    pages: getPage()
   )
 
