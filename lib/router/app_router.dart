@@ -1,5 +1,5 @@
-import 'package:audio_library/IntroPage/intro_page.dart';
-import 'package:audio_library/login/login_screen.dart';
+import 'package:audio_library/config/cusom_image_and_icon/IntroPage/intro_page.dart';
+import 'package:audio_library/features/login/screen/login_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:audio_library/router/route_names.dart';
 final GoRouter appRouter = GoRouter(
