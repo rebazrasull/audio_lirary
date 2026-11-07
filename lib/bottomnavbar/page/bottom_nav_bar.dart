@@ -20,9 +20,42 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _pages =[
 
    HomeScreen(),
-    Center(child: Text('2')),
-    Center(child: Text('3')),
-    Center(child: Text('4')),
+         Center(
+            child: Text(
+              'It Will Be Available Soon .....',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+              )
+            ),
+         Center(
+            child: Text(
+              'It Will Be Available Soon .....',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+              )
+            ),
+          Center(
+            child: Text(
+              'It Will Be Available Soon .....',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+              )
+            ),
   ];
   
   @override
