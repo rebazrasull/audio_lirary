@@ -8,6 +8,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int selectedCategoryIndex = 0;
+  final List<String> categories = ['All', 'Audiobooks', 'Podcasts', 'Music', 'Summaries'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,8 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
         
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
+             
            
           ],
         ),
