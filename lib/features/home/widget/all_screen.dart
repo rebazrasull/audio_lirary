@@ -1,3 +1,4 @@
+import 'package:audio_library/features/home/audiobook/audio_book_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class AllScreen extends StatefulWidget {
@@ -105,7 +106,7 @@ class _AllScreenState extends State<AllScreen> {
               ],
             ),
           ),
-           SizedBox(height: 12.0),
+           SizedBox(height: 14.0),
       
           SizedBox(
             height: 200.0, 
@@ -114,42 +115,49 @@ class _AllScreenState extends State<AllScreen> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 final item = history[index];
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Image Container
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12.0),
-                        child: Image.network(
-                           item['image']??'',
-                          height: 150.0,
-                          width: 132.0,
-                          fit: BoxFit.cover,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder:(context) => const AudioBookDetailsScreen(), )
+                      );
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Image Container
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12.0),
+                          child: Image.network(
+                             item['image']??'',
+                            height: 150.0,
+                            width: 132.0,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                   SizedBox(height: 8.0),
-                    // Title Text
-                     Padding(
-                       padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0
+                     SizedBox(height: 8.0),
+                      // Title Text
+                       Padding(
+                         padding: const EdgeInsets.symmetric(
+                          horizontal: 12.0
+                         ),
+                         child: Text(
+                          item['title']??'',
+                          maxLines: 4,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                         ),
                        ),
-                       child: Text(
-                        item['title']??'',
-                        maxLines: 4,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                       ),
-                     ),
-                  ],
+                    ],
+                  ),
                 );
               },
             ),
@@ -196,7 +204,7 @@ class _AllScreenState extends State<AllScreen> {
             ),
           ),
           SizedBox(
-            height: 12.0,
+            height: 14.0,
           ),
              SizedBox(
             height: 200.0, 

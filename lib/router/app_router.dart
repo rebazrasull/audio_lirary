@@ -21,5 +21,10 @@ final GoRouter appRouter = GoRouter(
       name: 'bottomv',
       builder: (context, state) => const BottomNavBar() ,
     ),
+    //   GoRoute(
+    //   path: RouteNames.bottomv,
+    //   name: 'bottomv',
+    //   builder: (context, state) => const BottomNavBar() ,
+    // ),
   ],
 );
