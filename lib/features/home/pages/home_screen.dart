@@ -1,4 +1,4 @@
-import 'package:audio_library/features/home/widget/all_screen.dart';
+import 'package:audio_library/features/home/pages/allscreen/pages/all_screen.dart';
 import 'package:audio_library/features/home/widget/new_screen.dart';
 import 'package:flutter/material.dart';
 

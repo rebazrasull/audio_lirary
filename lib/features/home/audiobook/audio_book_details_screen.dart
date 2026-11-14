@@ -1,129 +1,145 @@
-import 'package:audio_library/features/home/audiobook/widget/detail_tile.dart';
 import 'package:audio_library/features/home/audiobook/widget/info_chip.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AudioBookDetailsScreen extends StatelessWidget {
-  const AudioBookDetailsScreen({super.key});
+  final String title;
+  final String image;
+  final String subtitle;
+
+  const AudioBookDetailsScreen({
+    super.key,
+    this.title = 'Twenty Years After',
+    this.image = 'https://www.digitalbook.io/ol/covers.openlibrary.org/b/id/14634038-L.jpg',
+    this.subtitle = 'Restored Classics to Go Edition',
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
-        automaticallyImplyLeading:false,
-        backgroundColor:Colors.brown[100],
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.brown[100],
         centerTitle: true,
         elevation: 0.0,
-        leading: GestureDetector(
-          onTap: () {
-            
-          },
-          child: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              ),
+        leading: IconButton(
+          onPressed: () => context.pop(),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
         ),
-        title: Text(
+        title: const Text(
           'AudioBook',
           maxLines: 1,
           style: TextStyle(
             color: Colors.black,
             fontSize: 24.0,
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
           ),
+        ),
+        actionsPadding: const EdgeInsets.symmetric(horizontal: 12.0),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.bookmark_border),
           ),
-          actionsPadding: EdgeInsets.symmetric(
-            horizontal: 12.0
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_vert),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {
-              
-            },
-             icon: Icon(Icons.bookmark_border)
-             ),
-               IconButton(
-              onPressed: () {
-              
-            },
-             icon: Icon(Icons.more_vert)
-             ),
-          ],
-           ),
-           body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal:120.0,
-                    vertical: 42.0
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0),
-                      color: Colors.grey
-                    ),
-                    child:  ClipRRect(
-                      borderRadius: BorderRadiusGeometry.circular(12.0),
-                      child: Image.network(
-                        'https://www.digitalbook.io/ol/covers.openlibrary.org/b/id/14634038-L.jpg',
-                        ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Responsive Cover Image Container
+            Center(
+              child: SizedBox(
+                width: 180,
+                height: 260,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color: Colors.grey[300],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
                       ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: Image.network(
+                      image,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => const Center(
+                        child: Icon(Icons.broken_image, color: Colors.grey),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Twenty Years After',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.w900
-                  ),
-                  ),
-                  ),
-                   Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Alexandre Dumas',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.blueGrey,
-                    fontSize: 18.0,
+            ),
+            const SizedBox(height: 24.0),
+            
+            // Title
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                title,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.w900,
                 ),
               ),
             ),
-            SizedBox(
-              height: 8.0,
+            const SizedBox(height: 6.0),
+
+            // Subtitle
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                subtitle,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.blueGrey,
+                  fontSize: 16.0,
+                ),
+              ),
             ),
-            Row(
+            const SizedBox(height: 12.0),
+
+            // Rating Row
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.star_rounded,
-                   color: Color(0xFFFFB800),
-                    size: 24
-                    ),
-                    SizedBox(
-                      width: 8.0,
-                    ),
-                    Text(
-                      '4.8',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                  color: Color(0xFFFFB800),
+                  size: 24,
+                ),
+                SizedBox(width: 6.0),
+                Text(
+                  '4.8',
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF1E293B),
                   ),
-                      ),
-                    SizedBox(width: 6),
+                ),
+                SizedBox(width: 6),
                 Text(
                   '(2.4k reviews)',
                   style: TextStyle(
@@ -132,109 +148,80 @@ class AudioBookDetailsScreen extends StatelessWidget {
                   ),
                 ),
               ],
-              ),
-              SizedBox(height: 24),
-               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InfoChip(
-                    iconData: Icons.attach_money_rounded,
-                     label: 'Free',
-                      color: Color(0xFF22C55E),
-                      ),
-                  SizedBox(
-                    width: 8.0,
-                    ),
-                  InfoChip(
-                    iconData: Icons.language_rounded,
-                     label: 'English', 
-                     color: Color(0xFF3B82F6)
-                     ),
-                   SizedBox(
-                    width: 8.0,
-                    ),
-                  InfoChip(
-                    iconData: Icons.category_outlined,
-                     label: 'Fiction',
-                      color:Color(0xFFA855F7)
-                      ),
-                ],
-               ),
-               SizedBox(
-                height: 28.0,
-               ),
-               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton.icon(
-                    onPressed: () {
-                    
-                  }, 
-                   icon: const Icon(
+            ),
+            const SizedBox(height: 20),
+
+            // Info Chips Row
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InfoChip(
+                  iconData: Icons.attach_money_rounded,
+                  label: 'Free',
+                  color: Color(0xFF22C55E),
+                ),
+                SizedBox(width: 8.0),
+                InfoChip(
+                  iconData: Icons.language_rounded,
+                  label: 'English',
+                  color: Color(0xFF3B82F6),
+                ),
+                SizedBox(width: 8.0),
+                InfoChip(
+                  iconData: Icons.category_outlined,
+                  label: 'Fiction',
+                  color: Color(0xFFA855F7),
+                ),
+              ],
+            ),
+            const SizedBox(height: 32.0),
+
+            // Action Buttons Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(
                     Icons.play_arrow_rounded,
                     color: Colors.white,
-                     size: 26.0,
-                     ),
-                  label: Text(
+                    size: 26.0,
+                  ),
+                  label: const Text(
                     'Play Now',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18.0
-                    ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2563EB),
-                      // padding: EdgeInsets.symmetric(
-                      //   vertical: 14.0,
-                      //   horizontal: 18.0
-                      // ),
-                      minimumSize: Size(172,52),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.circular(14.0)
-                      )
-                  
+                      fontSize: 18.0,
                     ),
                   ),
-                  SizedBox(
-                    width: 12.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFFEFF6FF),
-                      borderRadius: BorderRadius.circular(14),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF2563EB),
+                    minimumSize: const Size(172, 52),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14.0),
                     ),
-                    child: IconButton(
-                        padding: EdgeInsets.all(16),
-                      onPressed: () {
-                      
-                    },
-                     icon: Icon(
+                  ),
+                ),
+                const SizedBox(width: 12.0),
+                Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFEFF6FF),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: IconButton(
+                    padding: const EdgeInsets.all(16),
+                    onPressed: () {},
+                    icon: const Icon(
                       Icons.podcasts_rounded,
-                       color: Color(0xFF2563EB)
-                       )
-                     ),
+                      color: Color(0xFF2563EB),
+                    ),
                   ),
-                ],
-               ),
-              //  Row(
-              //   mainAxisAlignment: MainAxisAlignment.start,
-              //   children: [
-              //     DetailTile(
-              //       icon: Icons.graphic_eq_rounded,
-              //        value: 'Provider',
-              //         label: 'LibriVox',
-              //         ),
-              //      DetailTile(
-              //       icon: Icons.record_voice_over_outlined,
-              //        value: 'Narrator', 
-              //        label: 'Christine Lehman',
-              //        ),
-              //   ],
-              //  )
-            ],
-           ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
