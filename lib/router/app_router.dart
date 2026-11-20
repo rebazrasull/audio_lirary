@@ -26,7 +26,11 @@ final GoRouter appRouter = GoRouter(
       GoRoute(
       path: RouteNames.audioBook,
       name: 'audioBook',
-      builder: (context, state) => const AudioBookDetailsScreen(title: '', image: '', subtitle: '',),
+      builder: (context, state) => const AudioBookDetailsScreen(
+        title: '',
+         image: '',
+          subtitle: '',
+        ),
     ),
     GoRoute(
       path: RouteNames.home,

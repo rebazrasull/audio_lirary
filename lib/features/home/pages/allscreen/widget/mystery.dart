@@ -41,126 +41,138 @@ class _MysteryState extends State<Mystery> {
       'subtitle':'Robert Hichens',
     },
    ];
+    bool  isExpanded =false;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Text(
-                  'Mystery',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {},
-                  child: const Text(
-                    'View all',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const Icon(
-                  Icons.chevron_right_outlined,
+        // Header Row (Title & View All)
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text(
+                'Mystery',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
                   color: Colors.white,
-                  size: 21,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            ),
+              ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isExpanded = !isExpanded;
+                  });
+                  // TODO: Handle full view expansion or navigation here if needed
+                },
+                child: Row(
+                  children: [
+                    const Text(
+                      'View all',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Icon(
+                      isExpanded
+                          ? Icons.expand_more_outlined
+                          : Icons.chevron_right_outlined,
+                      color: Colors.white,
+                      size: 21,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          SizedBox(
-            height: 12.0,
-          ),
-
-         SizedBox(
-          height: 300.0, 
-         child: ListView.builder(
-        itemCount: blography.length,
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 6.0),
-        itemBuilder: (context, index) {
-          final item = blography[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => AudioBookDetailsScreen(
-                    title: item['title'] ?? '',
-                    image: item['image'] ?? '',
-                     subtitle: item['subtitle'] ?? '',
+        ),
+        const SizedBox(height: 12.0),
+        // Horizontal ListView of Books
+        SizedBox(
+          height: 300.0,
+          child: ListView.builder(
+            itemCount: blography.length,
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 6.0),
+            itemBuilder: (context, index) {
+              final item = blography[index];
+              return GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AudioBookDetailsScreen(
+                        title: item['title'] ?? '',
+                        image: item['image'] ?? '',
+                        subtitle: item['subtitle'] ?? '',
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 132.0,
+                  margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: Image.network(
+                          item['image'] ?? '',
+                          height: 200.0,
+                          width: 132.0,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            height: 200.0,
+                            width: 132.0,
+                            color: Colors.grey[800],
+                            child: const Icon(Icons.broken_image, color: Colors.white54),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12.0),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item['title'] ?? '',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                          Text(
+                            item['subtitle'] ?? ' ',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               );
             },
-            child: Container(
-              width: 132.0,
-              margin: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12.0),
-                    child: Image.network(
-                      item['image'] ?? '',
-                      height: 200.0,
-                      width: 132.0,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        height: 165.0,
-                        width: 132.0,
-                        color: Colors.grey[800],
-                        child: const Icon(Icons.broken_image, color: Colors.white54),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12.0),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item['title'] ?? '',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        item['subtitle'] ??' ',
-                         maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                        )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-           )
+          ),
+        ),
       ],
     );
   }

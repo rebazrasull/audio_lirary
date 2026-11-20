@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
               tabs: [
              Tab(icon: Icon(Icons.grid_view_rounded), text: 'All'),
              Tab(icon: Icon(Icons.new_releases_outlined), text: 'New'),
-             Tab(icon: Icon(Icons.auto_stories_rounded), text: 'Story'),
+             Tab(icon: Icon(Icons.save_alt_outlined), text: 'Save'),
              ]
             ),
             SizedBox(
