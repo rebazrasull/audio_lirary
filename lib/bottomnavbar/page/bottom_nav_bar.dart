@@ -1,5 +1,6 @@
+import 'package:audio_library/features/explore/page/explore_screen.dart';
 import 'package:audio_library/features/home/pages/home_screen.dart';
-import 'package:audio_library/features/library/pages/new_screen.dart';
+import 'package:audio_library/features/library/library_screen%20.dart';
 import 'package:audio_library/features/profile/pages/audio_library_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -22,20 +23,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _pages =[
 
    HomeScreen(),
-   NewScreen(),
-         Center(
-            child: Text(
-
-              'It Will Be Available Soon .....',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-              )
-            ),
+   LibraryScreen(),
+   ExploreScreen(),
    AudioLibraryProfileScreen() 
   ];
   

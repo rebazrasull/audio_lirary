@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class NewScreen extends StatefulWidget {
+class LibraryScreen  extends StatefulWidget {
   final String title;
   final String subtitle;
   final IconData icon;
 
-  const NewScreen({
+  const LibraryScreen({
     super.key,
     this.title = 'Coming Soon',
     this.subtitle = 'This section is currently being crafted for your library.',
@@ -13,10 +13,10 @@ class NewScreen extends StatefulWidget {
   });
 
   @override
-  State<NewScreen> createState() => _NewScreenState();
+  State<LibraryScreen> createState() => _NewScreenState();
 }
 
-class _NewScreenState extends State<NewScreen> {
+class _NewScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(

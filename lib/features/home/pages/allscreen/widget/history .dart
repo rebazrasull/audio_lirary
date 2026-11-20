@@ -122,69 +122,9 @@ class _HistoryState extends State<History> {
           ),
         ),
         const SizedBox(height: 14.0),
+
         if (_isExpanded)
-          _buildExpandedList()
-        else
-          _buildHorizontalList(),
-      ],
-    );
-  }
-
-  Widget _buildHorizontalList() {
-    return SizedBox(
-      height: 275.0,
-      child: ListView.builder(
-        itemCount: _history.length,
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 6.0),
-        itemBuilder: (context, index) {
-          final item = _history[index];
-          return GestureDetector(
-            onTap: () => _openDetails(item),
-            child: Container(
-              width: 132.0,
-              margin: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _CoverImage(
-                    url: item.image,
-                    width: 132.0,
-                    height: 200.0,
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    item.title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    item.subtitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildExpandedList() {
-    return ListView.separated(
+           ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -239,8 +179,66 @@ class _HistoryState extends State<History> {
           ),
         );
       },
+    )
+    
+        else
+          SizedBox(
+      height: 275.0,
+      child: ListView.builder(
+        itemCount: _history.length,
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 6.0),
+        itemBuilder: (context, index) {
+          final item = _history[index];
+          return GestureDetector(
+            onTap: () => _openDetails(item),
+            child: Container(
+              width: 132.0,
+              margin: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _CoverImage(
+                    url: item.image,
+                    width: 132.0,
+                    height: 200.0,
+                  ),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    item.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    item.subtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    )
+      ],
     );
   }
+
+
+
+
 }
 
 class _CoverImage extends StatelessWidget {
